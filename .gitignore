@@ -1,7 +1,7 @@
-/jmp-working-module/target/
-/jmp-service-api/target/
-/jmp-dto/target/
-/jmp-cloud-bank-impl/target/
-/jmp-cloud-service-impl/target/
-/jmp-bank-api/target/
-/.idea
+/Java core/jmp-working-module/target/
+/Java core/jmp-service-api/target/
+/Java core/jmp-dto/target/
+/Java core/jmp-cloud-bank-impl/target/
+/Java core/jmp-cloud-service-impl/target/
+/Java core/jmp-bank-api/target/
+/.idea/
