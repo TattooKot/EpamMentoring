@@ -124,7 +124,7 @@ public class MainService {
         System.out.println("Enter card number:");
         cardNumber = scanner.nextLine();
 
-        if(!cardNumber.matches("^\\d{12}$")){
+        if(!cardNumber.matches("^\\d{10}$")){
             cardNumber = "0";
         }
 
