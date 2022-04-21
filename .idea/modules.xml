@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/jmp-cloud-service-impl/jmp-cloud-service-impl.iml" filepath="$PROJECT_DIR$/jmp-cloud-service-impl/jmp-cloud-service-impl.iml" />
       <module fileurl="file://$PROJECT_DIR$/jmp-dto/jmp-dto.iml" filepath="$PROJECT_DIR$/jmp-dto/jmp-dto.iml" />
       <module fileurl="file://$PROJECT_DIR$/jmp-service-api/jmp-service-api.iml" filepath="$PROJECT_DIR$/jmp-service-api/jmp-service-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jmp-service-load/jmp-service-load.iml" filepath="$PROJECT_DIR$/jmp-service-load/jmp-service-load.iml" />
     </modules>
   </component>
 </project>

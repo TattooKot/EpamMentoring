@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/jmp-dto/pom.xml" />
         <option value="$PROJECT_DIR$/jmp-bank-api/pom.xml" />
         <option value="$PROJECT_DIR$/jmp-service-api/pom.xml" />
+        <option value="$PROJECT_DIR$/jmp-service-load/pom.xml" />
         <option value="$PROJECT_DIR$/jmp-working-module/pom.xml" />
         <option value="$PROJECT_DIR$/jmp-cloud-bank-impl/pom.xml" />
         <option value="$PROJECT_DIR$/jmp-cloud-service-impl/pom.xml" />
