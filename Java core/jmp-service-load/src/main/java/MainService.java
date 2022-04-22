@@ -8,8 +8,8 @@ import java.util.ServiceLoader;
 
 public class MainService {
 
-    private final ServiceLoader<ServiceImpl> serviceLoader = ServiceLoader.load(ServiceImpl.class);
-    private final Service service = serviceLoader.findFirst().orElse(null);
+    private final ServiceLoader<Service> serviceLoader = ServiceLoader.load(Service.class);
+    private final Service service = serviceLoader.findFirst().orElseGet(ServiceImpl::new);
     private final Scanner scanner = new Scanner(System.in);
     private final Bank bank = new BankImpl();
 
