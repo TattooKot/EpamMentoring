@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/EpamMentoring.iml" filepath="$PROJECT_DIR$/.idea/EpamMentoring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCore/JavaCore.iml" filepath="$PROJECT_DIR$/JavaCore/JavaCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaMultithreading/JavaMultithreading.iml" filepath="$PROJECT_DIR$/JavaMultithreading/JavaMultithreading.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/KotsahaEpamMentoring.iml" filepath="$PROJECT_DIR$/.idea/KotsahaEpamMentoring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCore/application/application.iml" filepath="$PROJECT_DIR$/JavaCore/application/application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCore/jmp.bank.api/jmp.bank.api.iml" filepath="$PROJECT_DIR$/JavaCore/jmp.bank.api/jmp.bank.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCore/jmp.cloud.bank.impl/jmp.cloud.bank.impl.iml" filepath="$PROJECT_DIR$/JavaCore/jmp.cloud.bank.impl/jmp.cloud.bank.impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCore/jmp.cloud.service.impl/jmp.cloud.service.impl.iml" filepath="$PROJECT_DIR$/JavaCore/jmp.cloud.service.impl/jmp.cloud.service.impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCore/jmp.dto/jmp.dto.iml" filepath="$PROJECT_DIR$/JavaCore/jmp.dto/jmp.dto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCore/jmp.service.api/jmp.service.api.iml" filepath="$PROJECT_DIR$/JavaCore/jmp.service.api/jmp.service.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaCore/jmp.service.load/jmp.service.load.iml" filepath="$PROJECT_DIR$/JavaCore/jmp.service.load/jmp.service.load.iml" />
     </modules>
   </component>
 </project>

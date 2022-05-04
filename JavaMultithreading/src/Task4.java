@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/** * Pool that block when it has not any items or it full */
-
 public class Task4 {
 
 }
