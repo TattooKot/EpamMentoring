@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JavaCore/JavaCore.iml" filepath="$PROJECT_DIR$/JavaCore/JavaCore.iml" />
-      <module fileurl="file://$PROJECT_DIR$/JavaMultithreading/JavaMultithreading.iml" filepath="$PROJECT_DIR$/JavaMultithreading/JavaMultithreading.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaMulti/JavaMulti.iml" filepath="$PROJECT_DIR$/JavaMulti/JavaMulti.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/KotsahaEpamMentoring.iml" filepath="$PROJECT_DIR$/.idea/KotsahaEpamMentoring.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaCore/application/application.iml" filepath="$PROJECT_DIR$/JavaCore/application/application.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaCore/jmp.bank.api/jmp.bank.api.iml" filepath="$PROJECT_DIR$/JavaCore/jmp.bank.api/jmp.bank.api.iml" />

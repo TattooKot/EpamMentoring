@@ -21,7 +21,7 @@ class BlockingObjectPool<T> {
         notify();
     }
 
-    public synchronized void take() throws InterruptedException {
+    public synchronized T take() throws InterruptedException {
         while (buffer.size() == 0){
             wait();
         }
@@ -29,5 +29,6 @@ class BlockingObjectPool<T> {
         buffer.remove(0);
         System.out.println("Object removed: " + object);
         notify();
+        return object;
     }
 }
