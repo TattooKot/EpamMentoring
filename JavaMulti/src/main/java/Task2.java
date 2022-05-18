@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Task2 {
 
-    static final List<Integer> integers = new ArrayList<>();
+    static final CopyOnWriteArrayList<Integer> integers = new CopyOnWriteArrayList<>();
 
     public static void main(String[] args) throws InterruptedException {
 
