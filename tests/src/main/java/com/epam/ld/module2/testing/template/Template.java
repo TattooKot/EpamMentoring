@@ -14,14 +14,24 @@ public class Template {
     }
 
     public String getResultString(List<String> tags) throws InvalidPropertiesFormatException {
-        if(Objects.isNull(tags)) throw new InvalidPropertiesFormatException("Tags cant be null");
-
-        long amountTags = Arrays.stream(pattern.split(" "))
+        long amountOfTags = Arrays.stream(pattern.split(" "))
                 .filter(s -> s.equals("#{subject}"))
                 .count();
 
-        if(tags.size() < amountTags) throw new InvalidPropertiesFormatException("Not enough tags added");
+        if(Objects.isNull(tags)){
+            throw new InvalidPropertiesFormatException("Tags cant be null");
+        }
 
-        return "";
+        if(tags.size() < amountOfTags){
+            throw new InvalidPropertiesFormatException("Not enough tags added");
+        }
+
+        String result = pattern;
+
+        for (int i = 0; i < amountOfTags; i++) {
+            result = result.replace("#{subject}", tags.get(i));
+        }
+
+        return result;
     }
 }
