@@ -24,4 +24,11 @@ public class TemplateEngineTest {
         template.getResultString(null);
     }
 
+
+
+    @Test(expected = InvalidPropertiesFormatException.class)
+    public void testTemplateNotEnoughTags() throws InvalidPropertiesFormatException {
+        fail();
+    }
+
 }
