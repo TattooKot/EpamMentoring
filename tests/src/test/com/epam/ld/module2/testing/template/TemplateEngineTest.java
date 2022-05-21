@@ -12,8 +12,9 @@ public class TemplateEngineTest {
 
     @Test
     public void setTemplateVariables() throws InvalidPropertiesFormatException {
-        Template template = new Template("");
+        Template template = new Template("#{subject}");
         List<String> tags = new ArrayList<>();
+        tags.add("tag");
         String result = template.getResultString(tags);
         assertNotNull(result);
     }
@@ -38,7 +39,7 @@ public class TemplateEngineTest {
 
     @Test
     public void moreThatExpectedTags() throws InvalidPropertiesFormatException {
-        Template template = new Template("");
+        Template template = new Template("#{subject} #{subject} #{subject}");
         List<String> tags = new ArrayList<>();
         tags.add("tag");
         tags.add("tag");
