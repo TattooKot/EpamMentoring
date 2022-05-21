@@ -29,7 +29,11 @@ public class TemplateEngineTest {
     @Test(expected = InvalidPropertiesFormatException.class)
     public void testTemplateNotEnoughTags() throws InvalidPropertiesFormatException {
         Template template = new Template();
-        template.getResultString(new ArrayList<>());
+        List<String> tags = new ArrayList<>();
+        tags.add("tag");
+        tags.add("tag");
+        tags.add("tag");
+        template.getResultString(tags);
     }
 
     @Test
