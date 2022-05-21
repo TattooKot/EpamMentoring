@@ -9,16 +9,16 @@
     </parent>
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>JavaCore</artifactId>
+    <artifactId>java-core</artifactId>
 
     <modules>
-        <module>jmp.bank.api</module>
-        <module>jmp.dto</module>
-        <module>jmp.service.api</module>
-        <module>jmp.cloud.bank.impl</module>
-        <module>jmp.cloud.service.impl</module>
+        <module>jmp-bank-api</module>
+        <module>jmp-dto</module>
+        <module>jmp-service-api</module>
+        <module>jmp-cloud-bank-impl</module>
+        <module>jmp-cloud-service-impl</module>
         <module>application</module>
-        <module>jmp.service.load</module>
+        <module>jmp-service-load</module>
     </modules>
 
     <properties>
