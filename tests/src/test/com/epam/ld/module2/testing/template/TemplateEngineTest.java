@@ -32,4 +32,9 @@ public class TemplateEngineTest {
         template.getResultString(new ArrayList<>());
     }
 
+    @Test(expected = InvalidPropertiesFormatException.class)
+    public void moreThatExpectedTags() throws InvalidPropertiesFormatException {
+        fail();
+    }
+
 }
