@@ -3,6 +3,7 @@ package com.epam.ld.module2.testing.template;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -10,16 +11,17 @@ import static org.junit.Assert.*;
 public class TemplateEngineTest {
 
     @Test
-    public void setTemplateVariables(){
+    public void setTemplateVariables() throws InvalidPropertiesFormatException {
         Template template = new Template();
         List<String> tags = new ArrayList<>();
         String result = template.getResultString(tags);
         assertNotNull(result);
     }
 
-    @Test(expected = ClassFormatError.class)
-    public void testTemplateNullValue(){
-        fail();
+    @Test(expected = InvalidPropertiesFormatException.class)
+    public void testTemplateNullValue() throws InvalidPropertiesFormatException {
+        Template template = new Template();
+        template.getResultString(null);
     }
 
 }
