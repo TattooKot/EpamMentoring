@@ -2,7 +2,10 @@ package com.epam.ld.module2.testing.template;
 
 import com.epam.ld.module2.testing.Client;
 
-public interface TemplateEngine {
+/**
+ * The type Template engine.
+ */
+public class TemplateEngineFromConsole implements TemplateEngine {
     /**
      * Generate message string.
      *
@@ -10,6 +13,8 @@ public interface TemplateEngine {
      * @param client   the client
      * @return the string
      */
-
-    String generateMessage(Template template, Client client);
+    @Override
+    public String generateMessage(Template template, Client client) {
+        return null;
+    }
 }
