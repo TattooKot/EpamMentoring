@@ -10,12 +10,13 @@ public class Template {
     private final String pattern;
 
     public Template(String pattern) {
+        pattern = pattern.replaceAll("#\\{value}", "#{tag}");
         this.pattern = pattern;
     }
 
     public String getResultString(List<String> tags) throws InvalidPropertiesFormatException {
         long amountOfTags = Arrays.stream(pattern.split(" "))
-                .filter(s -> s.equals("#{subject}"))
+                .filter(s -> s.equals("#{tag}"))
                 .count();
 
         if(Objects.isNull(tags)){
@@ -29,7 +30,7 @@ public class Template {
         String result = pattern;
 
         for (int i = 0; i < amountOfTags; i++) {
-            result = result.replace("#{subject}", tags.get(i));
+            result = result.replace("#{tag}", tags.get(i));
         }
 
         return result;

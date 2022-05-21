@@ -11,7 +11,7 @@ import static org.junit.Assert.assertNotNull;
 public class TemplateTest {
     @Test
     public void setTemplateVariables() throws InvalidPropertiesFormatException {
-        Template template = new Template("#{subject}");
+        Template template = new Template("#{value}");
         List<String> tags = new ArrayList<>();
         tags.add("tag");
         String result = template.getResultString(tags);
@@ -28,7 +28,7 @@ public class TemplateTest {
 
     @Test(expected = InvalidPropertiesFormatException.class)
     public void testTemplateNotEnoughTags() throws InvalidPropertiesFormatException {
-        Template template = new Template(" #{subject}  #{subject}  #{subject}  #{subject}");
+        Template template = new Template(" #{value}  #{value}  #{value}  #{value}");
         List<String> tags = new ArrayList<>();
         tags.add("tag");
         tags.add("tag");
@@ -38,7 +38,7 @@ public class TemplateTest {
 
     @Test
     public void moreThatExpectedTags() throws InvalidPropertiesFormatException {
-        Template template = new Template("#{subject} #{subject} #{subject}");
+        Template template = new Template("#{value} #{value} #{value}");
         List<String> tags = new ArrayList<>();
         tags.add("tag");
         tags.add("tag");
