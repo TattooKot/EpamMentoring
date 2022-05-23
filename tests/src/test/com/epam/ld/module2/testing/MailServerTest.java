@@ -28,4 +28,14 @@ public class MailServerTest {
         server.send(address, message);
         verify(server).send(address, message);
     }
+
+    @Test(expected = InvalidPropertiesFormatException.class)
+    public void nullAddressTest() throws InvalidPropertiesFormatException {
+        fail();
+    }
+
+    @Test(expected = InvalidPropertiesFormatException.class)
+    public void nullMessageTest() throws InvalidPropertiesFormatException {
+        fail();
+    }
 }
