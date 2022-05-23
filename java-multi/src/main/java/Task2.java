@@ -5,25 +5,31 @@ public class Task2 {
 
     static final CopyOnWriteArrayList<Integer> integers = new CopyOnWriteArrayList<>();
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
-        Runnable add = () -> integers.add(ThreadLocalRandom.current().nextInt(0, 10));
+        Runnable add = () -> {
+            for (int i = 0; i < 10000; i++) {
+                integers.add(ThreadLocalRandom.current().nextInt(0, 10));
+            }
+        };
 
-        Runnable sum = () -> System.out.println("Sum: " + integers.stream().mapToInt(Integer::intValue).sum());
+        Runnable sum = () ->{
+            for (int i = 0; i < 10000; i++) {
+                System.out.println("Sum: " + integers.stream().mapToInt(Integer::intValue).sum());
+            }
+        };
 
-        Runnable abracadabra = () -> System.out.println("Abracadabra: " + Math.sqrt(integers.stream().mapToInt(i -> i * i).sum()));
+        Runnable abracadabra = () ->{
+            for (int i = 0; i < 10000; i++) {
+                System.out.println("Abracadabra: " + Math.sqrt(integers.stream().mapToInt(n -> n * n).sum()));
+            }
+        };
 
-
-        while (true) {
-            Thread t1 = new Thread(add);
-            Thread t2 = new Thread(sum);
-            Thread t3 = new Thread(abracadabra);
-            t1.start();
-            t2.start();
-            t3.start();
-            Thread.sleep(1000);
-        }
+        Thread t1 = new Thread(add);
+        Thread t2 = new Thread(sum);
+        Thread t3 = new Thread(abracadabra);
+        t1.start();
+        t2.start();
+        t3.start();
     }
-
-
 }
