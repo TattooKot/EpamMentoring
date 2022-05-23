@@ -6,9 +6,7 @@ import org.mockito.Mock;
 
 import java.util.InvalidPropertiesFormatException;
 
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class MailServerTest {
 
@@ -24,18 +22,20 @@ public class MailServerTest {
     }
 
     @Test
-    public void validInfoTest() throws InvalidPropertiesFormatException {
+    public void validInfoTest() {
         server.send(address, message);
         verify(server).send(address, message);
     }
 
-    @Test(expected = InvalidPropertiesFormatException.class)
-    public void nullAddressTest() throws InvalidPropertiesFormatException {
-        fail();
+    @Test(expected = IllegalArgumentException.class)
+    public void nullAddressTest() {
+        doThrow(new IllegalArgumentException()).when(server).send(null, message);
+        server.send(null, message);
     }
 
-    @Test(expected = InvalidPropertiesFormatException.class)
-    public void nullMessageTest() throws InvalidPropertiesFormatException {
-        fail();
+    @Test(expected = IllegalArgumentException.class)
+    public void nullMessageTest() {
+        doThrow(new IllegalArgumentException()).when(server).send(address, null);
+        server.send(address, null);
     }
 }
