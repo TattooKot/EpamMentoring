@@ -1,6 +1,5 @@
 package com.epam.ld.module2.testing;
 
-import java.util.InvalidPropertiesFormatException;
 import java.util.Objects;
 
 /**
@@ -18,5 +17,7 @@ public class MailServer {
         if(Objects.isNull(addresses) || Objects.isNull(messageContent)) {
             throw new IllegalArgumentException();
         }
+
+        System.out.printf("Message: %s\nClient(s): %s", messageContent, addresses);
     }
 }

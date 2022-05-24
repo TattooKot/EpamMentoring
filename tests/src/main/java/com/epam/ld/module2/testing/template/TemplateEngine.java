@@ -2,10 +2,7 @@ package com.epam.ld.module2.testing.template;
 
 import com.epam.ld.module2.testing.Client;
 
-import java.util.Arrays;
-import java.util.InvalidPropertiesFormatException;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * The type Template engine.
@@ -54,6 +51,15 @@ public class TemplateEngine {
     }
 
     private List<String> getTagsFromConsole(){
-        return null;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Write tags witch you wanna add, and press Enter");
+        System.out.println("(write q + enter to quit)");
+        List<String> tags = new ArrayList<>();
+        String line;
+
+        while (!(line = scanner.nextLine()).equals("q")){
+            tags.add(line);
+        }
+        return tags;
     }
 }
