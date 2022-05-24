@@ -2,6 +2,7 @@ package com.epam.ld.module2.testing.template;
 
 import com.epam.ld.module2.testing.Client;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -47,7 +48,23 @@ public class TemplateEngine {
     }
 
     private List<String> getTagsFromFile(){
-        return null;
+        System.out.println("Enter path to file with tags:");
+        Scanner scanner = new Scanner(System.in);
+        String filePath = scanner.nextLine();
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            List<String> tags = new ArrayList<>();
+            String tag;
+
+            while ((tag = reader.readLine()) != null){
+                tags.add(tag);
+            }
+
+            return tags;
+        } catch (IOException e) {
+            System.out.println("IO Error");
+            return new ArrayList<>();
+        }
     }
 
     private List<String> getTagsFromConsole(){
