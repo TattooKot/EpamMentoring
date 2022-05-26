@@ -3,7 +3,11 @@ package com.epam.ld.module2.testing.template;
 import com.epam.ld.module2.testing.Client;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * The type Template engine.
@@ -52,15 +56,10 @@ public class TemplateEngine {
         Scanner scanner = new Scanner(System.in);
         String filePath = scanner.nextLine();
 
-        try(BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            List<String> tags = new ArrayList<>();
-            String tag;
-
-            while ((tag = reader.readLine()) != null){
-                tags.add(tag);
-            }
-
-            return tags;
+        try {
+            return Files.lines(Paths.get(filePath))
+                    .filter(line -> !line.equals("q"))
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             System.out.println("IO Error");
             return new ArrayList<>();

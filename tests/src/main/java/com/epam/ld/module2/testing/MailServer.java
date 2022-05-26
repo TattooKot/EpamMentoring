@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -37,7 +39,7 @@ public class MailServer {
         String filePath = scanner.nextLine();
         File yourFile = new File(filePath);
 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get(filePath))) {
             yourFile.createNewFile();
             String result = String.format("Message: %s\nClient(s): %s", message, addresses);
             writer.write(result);
