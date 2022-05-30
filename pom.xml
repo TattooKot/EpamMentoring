@@ -12,6 +12,7 @@
         <module>java-core</module>
         <module>java-multi</module>
         <module>tests</module>
+        <module>files</module>
     </modules>
 
     <properties>
