@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.mockito.Spy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 
@@ -26,8 +27,7 @@ public class TemplateEngineTest {
     @Test
     public void setTemplateVariables() throws InvalidPropertiesFormatException {
         Template template = new Template("#{value}");
-        List<String> tags = new ArrayList<>();
-        tags.add("tag");
+        List<String> tags = List.of("tag");
 
         doReturn(tags).when(templateEngine).getTags();
         String result = templateEngine.generateMessage(template, new Client());
@@ -45,10 +45,7 @@ public class TemplateEngineTest {
     @Test(expected = InvalidPropertiesFormatException.class)
     public void testTemplateNotEnoughTags() throws InvalidPropertiesFormatException {
         Template template = new Template(" #{value}  #{value}  #{value}  #{value}");
-        List<String> tags = new ArrayList<>();
-        tags.add("tag");
-        tags.add("tag");
-        tags.add("tag");
+        List<String> tags = List.of("tag", "tag", "tag");
 
         doReturn(tags).when(templateEngine).getTags();
 
@@ -58,13 +55,7 @@ public class TemplateEngineTest {
     @Test
     public void moreThatExpectedTags() throws InvalidPropertiesFormatException {
         Template template = new Template("#{value} #{value} #{value}");
-        List<String> tags = new ArrayList<>();
-        tags.add("tag");
-        tags.add("tag");
-        tags.add("tag");
-        tags.add("tag");
-        tags.add("tag");
-        tags.add("tag");
+        List<String> tags = List.of("tag", "tag", "tag", "tag", "tag", "tag");
 
         doReturn(tags).when(templateEngine).getTags();
         String result = templateEngine.generateMessage(template, new Client());
