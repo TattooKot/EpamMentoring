@@ -11,6 +11,7 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -19,9 +20,12 @@ public class TemplateEngineTest {
     @Spy
     TemplateEngine templateEngine;
 
+    Client client;
+
     @Before
     public void stUp(){
         templateEngine = spy(new TemplateEngine(true));
+        client = new Client();
     }
 
     @Test
@@ -30,26 +34,25 @@ public class TemplateEngineTest {
         List<String> tags = List.of("tag");
 
         doReturn(tags).when(templateEngine).getTags();
-        String result = templateEngine.generateMessage(template, new Client());
+        String result = templateEngine.generateMessage(template, client);
 
         assertNotNull(result);
     }
 
-    @Test(expected = InvalidPropertiesFormatException.class)
-    public void testTemplateNullValue() throws InvalidPropertiesFormatException {
+    @Test
+    public void testTemplateNullValue() {
         Template template = new Template("");
         doReturn(null).when(templateEngine).getTags();
-        templateEngine.generateMessage(template, new Client());
+        assertThrows(InvalidPropertiesFormatException.class, () -> templateEngine.generateMessage(template, client));
     }
 
-    @Test(expected = InvalidPropertiesFormatException.class)
-    public void testTemplateNotEnoughTags() throws InvalidPropertiesFormatException {
+    @Test
+    public void testTemplateNotEnoughTags() {
         Template template = new Template(" #{value}  #{value}  #{value}  #{value}");
         List<String> tags = List.of("tag", "tag", "tag");
 
         doReturn(tags).when(templateEngine).getTags();
-
-        templateEngine.generateMessage(template, new Client());
+        assertThrows(InvalidPropertiesFormatException.class, () -> templateEngine.generateMessage(template, client));
     }
 
     @Test
@@ -58,7 +61,7 @@ public class TemplateEngineTest {
         List<String> tags = List.of("tag", "tag", "tag", "tag", "tag", "tag");
 
         doReturn(tags).when(templateEngine).getTags();
-        String result = templateEngine.generateMessage(template, new Client());
+        String result = templateEngine.generateMessage(template, client);
 
         assertNotNull(result);
     }
