@@ -1,18 +1,37 @@
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Task2 {
     public static void main(String[] args) {
 //        System.out.println(findFileWithMaxSLettersInName("C:\\Users\\Stanislav_Kotsaha\\Desktop\\New folder\\EpamMentoring"));
 //        System.out.println(getAverageSizeOfFiles("C:\\Users\\Stanislav_Kotsaha\\Desktop\\New folder\\EpamMentoring"));
-        System.out.println(getFiveLargestFiles("C:\\Users\\Stanislav_Kotsaha\\Desktop\\New folder\\EpamMentoring"));
+//        System.out.println(getFiveLargestFiles("C:\\Users\\Stanislav_Kotsaha\\Desktop\\New folder\\EpamMentoring"));
+        System.out.println(getNumberOfFilesAndFoldersByLetter("C:\\Users\\Stanislav_Kotsaha\\Desktop\\New folder\\EpamMentoring", "s"));
+    }
+
+    public static Map<String, Long> getNumberOfFilesAndFoldersByLetter(String path, String letter){
+        List<Path> allPaths = getAllPaths(path);
+
+        long numberOfFolders = allPaths.stream()
+                .filter(Files::isDirectory)
+                .filter(directory -> directory.getFileName().toString().startsWith(letter))
+                .count();
+
+        long numberOfFiles = allPaths.stream()
+                .filter(Files::isRegularFile)
+                .filter(file -> file.getFileName().toString().startsWith(letter))
+                .count();
+
+        Map<String, Long> result = new HashMap<>();
+        result.put("Folders", numberOfFolders);
+        result.put("Files", numberOfFiles);
+
+        return result;
     }
 
     public static List<String> getFiveLargestFiles(String path){
