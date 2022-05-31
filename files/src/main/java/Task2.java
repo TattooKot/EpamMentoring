@@ -11,7 +11,31 @@ import java.util.stream.Collectors;
 public class Task2 {
     public static void main(String[] args) {
 //        System.out.println(findFileWithMaxSLettersInName("C:\\Users\\Stanislav_Kotsaha\\Desktop\\New folder\\EpamMentoring"));
-        System.out.println(getAverageSizeOfFiles("C:\\Users\\Stanislav_Kotsaha\\Desktop\\New folder\\EpamMentoring"));
+//        System.out.println(getAverageSizeOfFiles("C:\\Users\\Stanislav_Kotsaha\\Desktop\\New folder\\EpamMentoring"));
+        System.out.println(getFiveLargestFiles("C:\\Users\\Stanislav_Kotsaha\\Desktop\\New folder\\EpamMentoring"));
+    }
+
+    public static List<String> getFiveLargestFiles(String path){
+        List<Path> pathList = getAllPaths(path);
+
+        List<String> list = pathList.stream()
+                .sorted(Comparator.comparing((file) -> {
+                    try {
+                        return Files.size(file);
+                    } catch (IOException e) {
+                        return 0L;
+                    }
+                }))
+                .map(filePath -> filePath.getFileName().toString())
+                .collect(Collectors.toList());
+
+        Collections.reverse(list);
+
+        if(list.size() > 5){
+            return list.subList(0, 5);
+        }
+
+        return list;
     }
 
     public static Double getAverageSizeOfFiles(String path) {
