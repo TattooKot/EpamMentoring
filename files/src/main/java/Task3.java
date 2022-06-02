@@ -2,18 +2,19 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class Task3 {
-//    10 mb: 1.~36000; 2.11ms;
-//    100 mb: 1.~427779; 2.23ms;
-//    1 gb: 1. ; 2.108;
+//    10 mb: 1:~36000; 2:11ms; 4:162ms;
+//    100 mb: 1:~427779; 2:23ms; 4:775ms;
+//    1 gb: 1. ; 2.108; 4:4722ms;
 
     public static final String FILE_FROM = "files\\1gbFile.txt";
     public static final String DESTINATION_FOLDER = "files\\resultFolder";
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        copyWithBuffer(Paths.get(FILE_FROM), Paths.get(DESTINATION_FOLDER));
+        nioCopy(Paths.get(FILE_FROM), Paths.get(DESTINATION_FOLDER));
         long finish = System.currentTimeMillis();
         System.out.println(finish - start);
 //        writeToFile(Paths.get(FILE_FROM), Paths.get(DESTINATION_FOLDER));
@@ -42,7 +43,6 @@ public class Task3 {
         String resultFile = getValidInfo(from, destinationFolder);
         if (resultFile == null) return;
 
-
         try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(from.toFile()), 100);
              BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(resultFile))) {
 
@@ -52,6 +52,18 @@ public class Task3 {
             }
 
             System.out.println("Done");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void nioCopy(Path from, Path destinationFolder) {
+        String resultFile = getValidInfo(from, destinationFolder);
+        if (resultFile == null) return;
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(resultFile))) {
+            List<String> collect = Files.lines(from).toList();
+            writer.write(collect.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
