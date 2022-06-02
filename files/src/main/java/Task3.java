@@ -1,23 +1,24 @@
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
 public class Task3 {
-//    10 mb: 1:~36000; 2:11ms; 4:162ms;
-//    100 mb: 1:~427779; 2:23ms; 4:775ms;
-//    1 gb: 1. ; 2.108; 4:4722ms;
+//    10 mb:  1:~36000ms;  2:11ms;  3:222ms;    4:162ms;
+//    100 mb: 1:~427779ms; 2:23ms;  3:~1630ms;  4:775ms;
+//    1 gb:   1. ;         2.108ms; 3:~17831ms; 4:4722ms;
 
-    public static final String FILE_FROM = "files\\1gbFile.txt";
+    public static final String FILE_FROM = "files\\10mbFile.txt";
     public static final String DESTINATION_FOLDER = "files\\resultFolder";
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        nioCopy(Paths.get(FILE_FROM), Paths.get(DESTINATION_FOLDER));
+        channelCopy(Paths.get(FILE_FROM), Paths.get(DESTINATION_FOLDER));
         long finish = System.currentTimeMillis();
         System.out.println(finish - start);
-//        writeToFile(Paths.get(FILE_FROM), Paths.get(DESTINATION_FOLDER));
     }
 
     public static void copyOnlyStream(Path from, Path destinationFolder) {
@@ -52,6 +53,25 @@ public class Task3 {
             }
 
             System.out.println("Done");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void channelCopy(Path from, Path destinationFolder) {
+        String resultFile = getValidInfo(from, destinationFolder);
+        if (resultFile == null) return;
+
+        try (FileInputStream fin = new FileInputStream(from.toFile());
+             FileOutputStream fos = new FileOutputStream(resultFile);
+             FileChannel in = fin.getChannel();
+             FileChannel out = fos.getChannel()) {
+
+            ByteBuffer buf = ByteBuffer.allocateDirect(100);
+            while (in.read(buf) > 0) {
+                out.write(buf);
+                buf.clear();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
