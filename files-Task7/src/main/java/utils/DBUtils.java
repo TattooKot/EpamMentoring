@@ -8,7 +8,7 @@ public class DBUtils {
     private static final String PASSWORD = "password";
 
 
-    public PreparedStatement getStatement(String sql){
+    public CallableStatement getStatement(String sql){
         try {
             return getConnection().prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException e) {
