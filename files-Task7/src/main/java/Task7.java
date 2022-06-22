@@ -1,11 +1,19 @@
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import model.DBFile;
+import service.DBFileService;
+
+import java.io.File;
+import java.nio.file.Path;
 
 public class Task7 {
+	private static final String FILE_FROM = "files-Task7\\test.txt";
+	private static final DBFileService fileService = new DBFileService();
 
 	public static void main(String[] args) {
-		SpringApplication.run(Task7.class, args);
+		Path path = Path.of(FILE_FROM);
+		File file = path.toFile();
+		DBFile dbFile = fileService.getFile(5);
+//		DBFile dbFile = fileService.saveFile(file);
+		System.out.println(dbFile);
 	}
 
 }
