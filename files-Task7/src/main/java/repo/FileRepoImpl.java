@@ -5,7 +5,10 @@ import utils.DBUtils;
 import utils.Requests;
 
 import java.io.File;
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -52,6 +55,8 @@ public class FileRepoImpl implements FileRepo {
                 result.setName(resultSet.getString("name"));
                 result.setPath(resultSet.getString("path"));
                 result.setExp(resultSet.getDate("exp"));
+
+                if (result.getExp().before(new java.util.Date())) throw new UnsupportedOperationException("File is expired");
 
                 return Optional.of(result);
             }
