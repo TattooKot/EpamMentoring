@@ -9,11 +9,11 @@ public class Task7 {
 	private static final String FILE_FROM = "files-Task7\\test.txt";
 	private static final DBFileService fileService = new DBFileService();
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Path path = Path.of(FILE_FROM);
 		File file = path.toFile();
-		DBFile dbFile = fileService.getFile(9);
-//		DBFile dbFile = fileService.saveFile(file);
+//		DBFile dbFile = fileService.getFile(9);
+		DBFile dbFile = fileService.saveFile(file);
 		System.out.println(dbFile);
 	}
 
