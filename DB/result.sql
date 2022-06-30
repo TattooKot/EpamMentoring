@@ -133,4 +133,26 @@ $$;
 --Use function
 select * from get_average_mark_by_subject_name('sub1');
 
-insert into students(name,surname, date_of_birth, phone_number) values('name', 'suranme', '19.01.1997', '0000000000');
+
+--10.Create function that will return student at "red zone" (red zone means at least 2 marks <=3). (0.3 point)
+create function red_zone_students()
+returns table (
+subjects_name text
+)
+language plpgsql
+as
+$$
+begin
+return query
+ select students.name
+    FROM grades
+    LEFT JOIN students
+    ON grades.student_id = students.id
+    where grades.mark <= 3
+	group by students.name
+	HAVING COUNT(*) >= 2;
+end;
+$$;
+
+--Use function
+select * from red_zone_students();
