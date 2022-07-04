@@ -1,8 +1,11 @@
 package org.example.core.repository;
 
+import java.util.Map;
+
 public interface CRUDRepo <T, R>{
-    R save(R r);
-    R getById(T id);
-    R update(R r);
+    Map.Entry<T, R> save(R r);
+    Map.Entry<T, R> getById(T id);
+    Map<T, R> getAll();
+    Map.Entry<T, R> update(R r);
     void deleteById(T id);
 }
