@@ -1,17 +1,17 @@
 package org.example.core.repository;
 
+import org.example.core.DB;
 import org.example.core.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class UserRepo implements CRUDRepo<Integer, User> {
 
-    private final Map<Integer, User> userMap = new ConcurrentHashMap<>();
+    private final Map<Integer, User> userMap = DB.userMap;
 
     public Optional<Map.Entry<Integer, User>> save(User user) {
         if (isFieldsIncorrect(user)) {

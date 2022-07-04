@@ -1,15 +1,17 @@
 package org.example.core.repository;
 
+import org.example.core.DB;
 import org.example.core.model.Event;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class EventRepo implements CRUDRepo<Integer, Event> {
 
-    private final Map<Integer, Event> eventMap = new ConcurrentHashMap<>();
+    private final Map<Integer, Event> eventMap = DB.eventMap;
 
     @Override
     public Optional<Map.Entry<Integer, Event>> save(Event event) {
@@ -28,7 +30,7 @@ public class EventRepo implements CRUDRepo<Integer, Event> {
 
     @Override
     public Map<Integer, Event> getAll() {
-        return Collections.unmodifiableMap(eventMap);
+        return eventMap;
     }
 
     @Override

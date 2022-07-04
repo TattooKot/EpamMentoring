@@ -1,14 +1,14 @@
 package org.example.core.repository;
 
+import org.example.core.DB;
 import org.example.core.model.Ticket;
 
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class TicketRepo implements CRUDRepo<Integer, Ticket> {
 
-    private final Map<Integer, Ticket> ticketMap = new ConcurrentHashMap<>();
+    private final Map<Integer, Ticket> ticketMap = DB.ticketMap;
 
     @Override
     public Optional<Map.Entry<Integer, Ticket>> save(Ticket ticket) {
