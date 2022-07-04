@@ -9,5 +9,5 @@ import java.util.List;
 public interface BookingFacade {
     List<Event> getAllEvents();
     User createUser(User user);
-    Ticket buyTicket(User user, Event event);
+    Ticket buyTicket(Integer userId, Integer eventId);
 }
