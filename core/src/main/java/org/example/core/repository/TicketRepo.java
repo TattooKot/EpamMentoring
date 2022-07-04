@@ -3,6 +3,7 @@ package org.example.core.repository;
 import org.example.core.model.Ticket;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TicketRepo implements CRUDRepo<Integer, Ticket> {
@@ -10,15 +11,18 @@ public class TicketRepo implements CRUDRepo<Integer, Ticket> {
     private final Map<Integer, Ticket> ticketMap = new ConcurrentHashMap<>();
 
     @Override
-    public Map.Entry<Integer, Ticket> save(Ticket ticket) {
+    public Optional<Map.Entry<Integer, Ticket>> save(Ticket ticket) {
         int newId = ticketMap.size() + 1;
         ticketMap.put(newId, ticket);
-        return Map.entry(newId, ticket);
+        return Optional.of(Map.entry(newId, ticket));
     }
 
     @Override
-    public Map.Entry<Integer, Ticket> getById(Integer id) {
-        return Map.entry(id, ticketMap.get(id));
+    public Optional<Map.Entry<Integer, Ticket>> getById(Integer id) {
+        if(ticketMap.get(id) == null){
+            return Optional.empty();
+        }
+        return Optional.of(Map.entry(id, ticketMap.get(id)));
     }
 
     @Override
@@ -27,7 +31,7 @@ public class TicketRepo implements CRUDRepo<Integer, Ticket> {
     }
 
     @Override
-    public Map.Entry<Integer, Ticket> update(Ticket ticket) {
+    public Optional<Map.Entry<Integer, Ticket>> update(Ticket ticket) {
         Integer id =
                 ticketMap.entrySet()
                         .stream()
@@ -36,8 +40,12 @@ public class TicketRepo implements CRUDRepo<Integer, Ticket> {
                         .findFirst()
                         .orElse(0);
 
+        if(id == 0){
+            return Optional.empty();
+        }
+
         ticketMap.put(id, ticket);
-        return Map.entry(id, ticket);
+        return Optional.of(Map.entry(id, ticket));
     }
 
     @Override

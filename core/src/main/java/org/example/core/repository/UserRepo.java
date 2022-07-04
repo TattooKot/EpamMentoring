@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -12,15 +13,22 @@ public class UserRepo implements CRUDRepo<Integer, User> {
 
     private final Map<Integer, User> userMap = new ConcurrentHashMap<>();
 
-    public Map.Entry<Integer, User> save(User user) {
+    public Optional<Map.Entry<Integer, User>> save(User user) {
+        if (isFieldsIncorrect(user)) {
+            return Optional.empty();
+        }
+
         int newId = userMap.size() + 1;
         userMap.put(newId, user);
-        return Map.entry(newId, user);
+        return Optional.of(Map.entry(newId, user));
     }
 
     @Override
-    public Map.Entry<Integer, User> getById(Integer id) {
-        return Map.entry(id, userMap.get(id));
+    public Optional<Map.Entry<Integer, User>> getById(Integer id) {
+        if (userMap.get(id) == null) {
+            return Optional.empty();
+        }
+        return Optional.of(Map.entry(id, userMap.get(id)));
     }
 
     @Override
@@ -29,7 +37,7 @@ public class UserRepo implements CRUDRepo<Integer, User> {
     }
 
     @Override
-    public Map.Entry<Integer, User> update(User user) {
+    public Optional<Map.Entry<Integer, User>> update(User user) {
         Integer id =
                 userMap.entrySet()
                         .stream()
@@ -38,9 +46,13 @@ public class UserRepo implements CRUDRepo<Integer, User> {
                         .findFirst()
                         .orElse(0);
 
+        if (id == 0 || isFieldsIncorrect(user)) {
+            return Optional.empty();
+        }
+
         userMap.put(id, user);
 
-        return Map.entry(id, user);
+        return Optional.of(Map.entry(id, user));
     }
 
     @Override
@@ -48,4 +60,7 @@ public class UserRepo implements CRUDRepo<Integer, User> {
         userMap.remove(id);
     }
 
+    private boolean isFieldsIncorrect(User user) {
+        return user.getName() == null || user.getEmail() == null || user.getPhone() == null;
+    }
 }

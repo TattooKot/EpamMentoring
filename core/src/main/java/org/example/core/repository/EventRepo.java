@@ -4,6 +4,7 @@ import org.example.core.model.Event;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class EventRepo implements CRUDRepo<Integer, Event> {
@@ -11,15 +12,18 @@ public class EventRepo implements CRUDRepo<Integer, Event> {
     private final Map<Integer, Event> eventMap = new ConcurrentHashMap<>();
 
     @Override
-    public Map.Entry<Integer, Event> save(Event event) {
+    public Optional<Map.Entry<Integer, Event>> save(Event event) {
         int newId = eventMap.size() + 1;
         eventMap.put(newId, event);
-        return Map.entry(newId,event);
+        return Optional.of(Map.entry(newId,event));
     }
 
     @Override
-    public Map.Entry<Integer, Event> getById(Integer id) {
-        return Map.entry(id, eventMap.get(id));
+    public Optional<Map.Entry<Integer, Event>> getById(Integer id) {
+        if(eventMap.get(id) == null){
+            return Optional.empty();
+        }
+        return Optional.of(Map.entry(id, eventMap.get(id)));
     }
 
     @Override
@@ -28,7 +32,7 @@ public class EventRepo implements CRUDRepo<Integer, Event> {
     }
 
     @Override
-    public Map.Entry<Integer, Event> update(Event event) {
+    public Optional<Map.Entry<Integer, Event>> update(Event event) {
         Integer id =
                 eventMap.entrySet()
                         .stream()
@@ -37,8 +41,12 @@ public class EventRepo implements CRUDRepo<Integer, Event> {
                         .findFirst()
                         .orElse(0);
 
+        if(id == 0){
+            return Optional.empty();
+        }
+
         eventMap.put(id, event);
-        return Map.entry(id, event);
+        return Optional.of(Map.entry(id, event));
     }
 
     @Override
