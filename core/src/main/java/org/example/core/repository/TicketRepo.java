@@ -6,20 +6,20 @@ import org.example.core.model.Ticket;
 import java.util.Map;
 import java.util.Optional;
 
-public class TicketRepo implements CRUDRepo<Integer, Ticket> {
+public class TicketRepo implements CRUDRepo<Long, Ticket> {
 
-    private final Map<Integer, Ticket> ticketMap = DB.ticketMap;
+    private final Map<Long, Ticket> ticketMap = DB.ticketMap;
 
     @Override
-    public Optional<Map.Entry<Integer, Ticket>> save(Ticket ticket) {
-        int newId = ticketMap.size() + 1;
+    public Optional<Map.Entry<Long, Ticket>> save(Ticket ticket) {
+        long newId = ticketMap.size() + 1;
         ticket.setId(newId);
         ticketMap.put(newId, ticket);
         return Optional.of(Map.entry(newId, ticket));
     }
 
     @Override
-    public Optional<Map.Entry<Integer, Ticket>> getById(Integer id) {
+    public Optional<Map.Entry<Long, Ticket>> getById(Long id) {
         if(ticketMap.get(id) == null){
             return Optional.empty();
         }
@@ -27,19 +27,19 @@ public class TicketRepo implements CRUDRepo<Integer, Ticket> {
     }
 
     @Override
-    public Map<Integer, Ticket> getAll() {
+    public Map<Long, Ticket> getAll() {
         return ticketMap;
     }
 
     @Override
-    public Optional<Map.Entry<Integer, Ticket>> update(Ticket ticket) {
-        Integer id =
+    public Optional<Map.Entry<Long, Ticket>> update(Ticket ticket) {
+        Long id =
                 ticketMap.entrySet()
                         .stream()
                         .filter(entry -> entry.getValue().equals(ticket))
                         .map(Map.Entry::getKey)
                         .findFirst()
-                        .orElse(0);
+                        .orElse(0L);
 
         if(id == 0){
             return Optional.empty();
@@ -50,7 +50,7 @@ public class TicketRepo implements CRUDRepo<Integer, Ticket> {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         ticketMap.remove(id);
     }
 }

@@ -9,20 +9,20 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class EventRepo implements CRUDRepo<Integer, Event> {
+public class EventRepo implements CRUDRepo<Long, Event> {
 
-    private final Map<Integer, Event> eventMap = DB.eventMap;
+    private final Map<Long, Event> eventMap = DB.eventMap;
 
     @Override
-    public Optional<Map.Entry<Integer, Event>> save(Event event) {
-        int newId = eventMap.size() + 1;
+    public Optional<Map.Entry<Long, Event>> save(Event event) {
+        Long newId = (long) (eventMap.size() + 1);
         event.setId(newId);
         eventMap.put(newId, event);
         return Optional.of(Map.entry(newId,event));
     }
 
     @Override
-    public Optional<Map.Entry<Integer, Event>> getById(Integer id) {
+    public Optional<Map.Entry<Long, Event>> getById(Long id) {
         if(eventMap.get(id) == null){
             return Optional.empty();
         }
@@ -30,19 +30,19 @@ public class EventRepo implements CRUDRepo<Integer, Event> {
     }
 
     @Override
-    public Map<Integer, Event> getAll() {
+    public Map<Long, Event> getAll() {
         return eventMap;
     }
 
     @Override
-    public Optional<Map.Entry<Integer, Event>> update(Event event) {
-        Integer id =
+    public Optional<Map.Entry<Long, Event>> update(Event event) {
+        Long id =
                 eventMap.entrySet()
                         .stream()
                         .filter(entry -> entry.getValue().equals(event))
                         .map(Map.Entry::getKey)
                         .findFirst()
-                        .orElse(0);
+                        .orElse(0L);
 
         if(id == 0){
             return Optional.empty();
@@ -53,7 +53,7 @@ public class EventRepo implements CRUDRepo<Integer, Event> {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         eventMap.remove(id);
     }
 }

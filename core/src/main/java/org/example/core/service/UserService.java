@@ -8,23 +8,23 @@ import java.util.Map;
 public class UserService {
     private final UserRepo userRepo = new UserRepo();
 
-    public Map.Entry<Integer, User> save(User user) {
-        return userRepo.save(user).orElseGet(() -> Map.entry(0, new User()));
+    public Map.Entry<Long, User> save(User user) {
+        return userRepo.save(user).orElseGet(() -> Map.entry(0L, new User()));
     }
 
-    public Map.Entry<Integer, User> getById(Integer id) {
-        return userRepo.getById(id).orElseGet(() -> Map.entry(0, new User()));
+    public Map.Entry<Long, User> getById(Long id) {
+        return userRepo.getById(id).orElseGet(() -> Map.entry(0L, new User()));
     }
 
-    public Map<Integer, User> getAll() {
+    public Map<Long, User> getAll() {
         return userRepo.getAll();
     }
 
-    public Map.Entry<Integer, User> update(User user) {
-        return userRepo.update(user).orElseGet(() -> Map.entry(0, new User()));
+    public Map.Entry<Long, User> update(User user) {
+        return userRepo.update(user).orElseGet(() -> Map.entry(0L, new User()));
     }
 
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         userRepo.deleteById(id);
     }
 }

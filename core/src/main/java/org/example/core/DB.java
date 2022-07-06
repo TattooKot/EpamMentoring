@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class DB {
-    public static final Map<Integer, Event> eventMap = new ConcurrentHashMap<>();
-    public static final Map<Integer, Ticket> ticketMap = new ConcurrentHashMap<>();
-    public static final Map<Integer, User> userMap = new ConcurrentHashMap<>();
+    public static final Map<Long, Event> eventMap = new ConcurrentHashMap<>();
+    public static final Map<Long, Ticket> ticketMap = new ConcurrentHashMap<>();
+    public static final Map<Long, User> userMap = new ConcurrentHashMap<>();
 }
