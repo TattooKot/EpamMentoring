@@ -1,0 +1,20 @@
+BTree index by name(students table): 112
+Hash index by name(students table): 43
+
+select * from students where name like '%N%';
+Hash index: 38
+BTree: 42
+
+select * from students where phone_number like '%0%';
+Hash index: 41
+BTree: 42
+
+select students.name, students.surname, subjects.name, grades.mark
+    FROM grades
+    JOIN students
+    ON grades.student_id = students.id
+    LEFT JOIN subjects
+    ON grades.subject_id = subjects.id
+    where students.surname like  '%Sur%';
+Hash index: 49
+BTree: 42
