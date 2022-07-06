@@ -9,11 +9,11 @@ public class EventService {
     private final EventRepo eventRepo = new EventRepo();
 
     public Map.Entry<Integer, Event> save(Event event) {
-        return eventRepo.save(event).orElseGet(() -> Map.entry(0, null));
+        return eventRepo.save(event).orElseGet(() -> Map.entry(0, new Event()));
     }
 
     public Map.Entry<Integer, Event> getById(Integer id) {
-        return eventRepo.getById(id).orElseGet(() -> Map.entry(0, null));
+        return eventRepo.getById(id).orElseGet(() -> Map.entry(0, new Event()));
     }
 
     public Map<Integer, Event> getAll() {
@@ -21,7 +21,7 @@ public class EventService {
     }
 
     public Map.Entry<Integer, Event> update(Event event) {
-        return eventRepo.update(event).orElseGet(() -> Map.entry(0, null));
+        return eventRepo.update(event).orElseGet(() -> Map.entry(0, new Event()));
     }
 
     public void deleteById(Integer id) {

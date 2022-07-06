@@ -9,11 +9,11 @@ public class TicketService {
     private final TicketRepo ticketRepo = new TicketRepo();
 
     public Map.Entry<Integer, Ticket> save(Ticket ticket) {
-        return ticketRepo.save(ticket).orElseGet(() -> Map.entry(0, null));
+        return ticketRepo.save(ticket).orElseGet(() -> Map.entry(0, new Ticket()));
     }
 
     public Map.Entry<Integer, Ticket> getById(Integer id) {
-        return ticketRepo.getById(id).orElseGet(() -> Map.entry(0, null));
+        return ticketRepo.getById(id).orElseGet(() -> Map.entry(0, new Ticket()));
     }
 
     public Map<Integer, Ticket> getAll() {
@@ -21,7 +21,7 @@ public class TicketService {
     }
 
     public Map.Entry<Integer, Ticket> update(Ticket ticket) {
-        return ticketRepo.update(ticket).orElseGet(() -> Map.entry(0, null));
+        return ticketRepo.update(ticket).orElseGet(() -> Map.entry(0, new Ticket()));
     }
 
     public void deleteById(Integer id) {
