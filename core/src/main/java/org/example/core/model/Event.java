@@ -5,8 +5,8 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class Event {
-    private String name;
+public class Event implements EventInterface{
+    private long id;
+    private String title;
     private Date date;
-    private Integer places;
 }
