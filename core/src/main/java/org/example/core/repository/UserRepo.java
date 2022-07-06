@@ -5,6 +5,7 @@ import org.example.core.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ public class UserRepo implements CRUDRepo<Long, User> {
 
     private final Map<Long, User> userMap = DB.userMap;
 
-    public Optional<Map.Entry<Long, User>> save(User user) {
+    public Optional<User> save(User user) {
         if (isFieldsIncorrect(user)) {
             return Optional.empty();
         }
@@ -21,24 +22,24 @@ public class UserRepo implements CRUDRepo<Long, User> {
         long newId = userMap.size() + 1;
         user.setId(newId);
         userMap.put(newId, user);
-        return Optional.of(Map.entry(newId, user));
+        return Optional.of(user);
     }
 
     @Override
-    public Optional<Map.Entry<Long, User>> getById(Long id) {
+    public Optional<User> getById(Long id) {
         if (userMap.get(id) == null) {
             return Optional.empty();
         }
-        return Optional.of(Map.entry(id, userMap.get(id)));
+        return Optional.of(userMap.get(id));
     }
 
     @Override
-    public Map<Long, User> getAll() {
-        return Collections.unmodifiableMap(userMap);
+    public List<User> getAll() {
+        return userMap.values().stream().toList();
     }
 
     @Override
-    public Optional<Map.Entry<Long, User>> update(User user) {
+    public Optional<User> update(User user) {
         Long id =
                 userMap.entrySet()
                         .stream()
@@ -53,7 +54,7 @@ public class UserRepo implements CRUDRepo<Long, User> {
 
         userMap.put(id, user);
 
-        return Optional.of(Map.entry(id, user));
+        return Optional.of(user);
     }
 
     @Override

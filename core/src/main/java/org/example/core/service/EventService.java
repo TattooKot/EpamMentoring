@@ -3,25 +3,25 @@ package org.example.core.service;
 import org.example.core.model.Event;
 import org.example.core.repository.EventRepo;
 
-import java.util.Map;
+import java.util.List;
 
 public class EventService {
     private final EventRepo eventRepo = new EventRepo();
 
-    public Map.Entry<Long, Event> save(Event event) {
-        return eventRepo.save(event).orElseGet(() -> Map.entry(0L, new Event()));
+    public Event save(Event event) {
+        return eventRepo.save(event).orElseGet(Event::new);
     }
 
-    public Map.Entry<Long, Event> getById(Long id) {
-        return eventRepo.getById(id).orElseGet(() -> Map.entry(0L, new Event()));
+    public Event getById(Long id) {
+        return eventRepo.getById(id).orElseGet(Event::new);
     }
 
-    public Map<Long, Event> getAll() {
+    public List<Event> getAll() {
         return eventRepo.getAll();
     }
 
-    public Map.Entry<Long, Event> update(Event event) {
-        return eventRepo.update(event).orElseGet(() -> Map.entry(0L, new Event()));
+    public Event update(Event event) {
+        return eventRepo.update(event).orElseGet(Event::new);
     }
 
     public void deleteById(Long id) {

@@ -3,6 +3,7 @@ package org.example.core.repository;
 import org.example.core.DB;
 import org.example.core.model.Ticket;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -11,28 +12,28 @@ public class TicketRepo implements CRUDRepo<Long, Ticket> {
     private final Map<Long, Ticket> ticketMap = DB.ticketMap;
 
     @Override
-    public Optional<Map.Entry<Long, Ticket>> save(Ticket ticket) {
+    public Optional<Ticket> save(Ticket ticket) {
         long newId = ticketMap.size() + 1;
         ticket.setId(newId);
         ticketMap.put(newId, ticket);
-        return Optional.of(Map.entry(newId, ticket));
+        return Optional.of(ticket);
     }
 
     @Override
-    public Optional<Map.Entry<Long, Ticket>> getById(Long id) {
+    public Optional<Ticket> getById(Long id) {
         if(ticketMap.get(id) == null){
             return Optional.empty();
         }
-        return Optional.of(Map.entry(id, ticketMap.get(id)));
+        return Optional.of(ticketMap.get(id));
     }
 
     @Override
-    public Map<Long, Ticket> getAll() {
-        return ticketMap;
+    public List<Ticket> getAll() {
+        return ticketMap.values().stream().toList();
     }
 
     @Override
-    public Optional<Map.Entry<Long, Ticket>> update(Ticket ticket) {
+    public Optional<Ticket> update(Ticket ticket) {
         Long id =
                 ticketMap.entrySet()
                         .stream()
@@ -46,7 +47,7 @@ public class TicketRepo implements CRUDRepo<Long, Ticket> {
         }
 
         ticketMap.put(id, ticket);
-        return Optional.of(Map.entry(id, ticket));
+        return Optional.of(ticket);
     }
 
     @Override

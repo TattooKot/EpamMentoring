@@ -3,25 +3,25 @@ package org.example.core.service;
 import org.example.core.model.Ticket;
 import org.example.core.repository.TicketRepo;
 
-import java.util.Map;
+import java.util.List;
 
 public class TicketService {
     private final TicketRepo ticketRepo = new TicketRepo();
 
-    public Map.Entry<Long, Ticket> save(Ticket ticket) {
-        return ticketRepo.save(ticket).orElseGet(() -> Map.entry(0L, new Ticket()));
+    public Ticket save(Ticket ticket) {
+        return ticketRepo.save(ticket).orElseGet(Ticket::new);
     }
 
-    public Map.Entry<Long, Ticket> getById(Long id) {
-        return ticketRepo.getById(id).orElseGet(() -> Map.entry(0L, new Ticket()));
+    public Ticket getById(Long id) {
+        return ticketRepo.getById(id).orElseGet(Ticket::new);
     }
 
-    public Map<Long, Ticket> getAll() {
+    public List<Ticket> getAll() {
         return ticketRepo.getAll();
     }
 
-    public Map.Entry<Long, Ticket> update(Ticket ticket) {
-        return ticketRepo.update(ticket).orElseGet(() -> Map.entry(0L, new Ticket()));
+    public Ticket update(Ticket ticket) {
+        return ticketRepo.update(ticket).orElseGet(Ticket::new);
     }
 
     public void deleteById(Long id) {
