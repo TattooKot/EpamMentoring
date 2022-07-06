@@ -13,6 +13,7 @@ public class TicketRepo implements CRUDRepo<Integer, Ticket> {
     @Override
     public Optional<Map.Entry<Integer, Ticket>> save(Ticket ticket) {
         int newId = ticketMap.size() + 1;
+        ticket.setId(newId);
         ticketMap.put(newId, ticket);
         return Optional.of(Map.entry(newId, ticket));
     }

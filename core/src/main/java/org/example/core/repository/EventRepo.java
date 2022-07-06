@@ -16,6 +16,7 @@ public class EventRepo implements CRUDRepo<Integer, Event> {
     @Override
     public Optional<Map.Entry<Integer, Event>> save(Event event) {
         int newId = eventMap.size() + 1;
+        event.setId(newId);
         eventMap.put(newId, event);
         return Optional.of(Map.entry(newId,event));
     }

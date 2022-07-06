@@ -19,6 +19,7 @@ public class UserRepo implements CRUDRepo<Integer, User> {
         }
 
         int newId = userMap.size() + 1;
+        user.setId(newId);
         userMap.put(newId, user);
         return Optional.of(Map.entry(newId, user));
     }
@@ -61,6 +62,16 @@ public class UserRepo implements CRUDRepo<Integer, User> {
     }
 
     private boolean isFieldsIncorrect(User user) {
+        User userWithSameEmail = userMap.values()
+                .stream()
+                .filter(v -> v.getEmail().equals(user.getEmail()))
+                .findFirst()
+                .orElse(null);
+
+        if(userWithSameEmail != null){
+            return true;
+        }
+
         return user.getName() == null || user.getEmail() == null || user.getPhone() == null;
     }
 }
