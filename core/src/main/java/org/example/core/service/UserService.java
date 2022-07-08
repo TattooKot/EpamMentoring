@@ -16,15 +16,23 @@ public class UserService {
         return userRepo.getById(id).orElseGet(User::new);
     }
 
+    public User getByEmail(String email){
+        return userRepo.getByEmail(email).orElseGet(User::new);
+    }
+
     public List<User> getAll() {
         return userRepo.getAll();
+    }
+
+    public List<User> getUsersByName(String name, int pageSize, int pageNum) {
+        return userRepo.getByName(name, pageSize, pageNum);
     }
 
     public User update(User user) {
         return userRepo.update(user).orElseGet(User::new);
     }
 
-    public void deleteById(Long id) {
-        userRepo.deleteById(id);
+    public boolean deleteById(Long id) {
+        return userRepo.deleteById(id);
     }
 }

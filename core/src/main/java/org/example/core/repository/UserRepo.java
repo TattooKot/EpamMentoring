@@ -1,7 +1,6 @@
 package org.example.core.repository;
 
 import org.example.core.DB;
-import org.example.core.model.Event;
 import org.example.core.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -33,9 +32,25 @@ public class UserRepo implements CRUDRepo<Long, User> {
         return Optional.of(userMap.get(id));
     }
 
+    public Optional<User> getByEmail(String email) {
+        return userMap.values()
+                .stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst();
+    }
+
     @Override
     public List<User> getAll() {
         return userMap.values().stream().toList();
+    }
+
+    public List<User> getByName(String name, int pageSize, int pageNumber){
+        return userMap.values()
+                .stream()
+                .filter(user -> user.getName().contains(name))
+                .skip((long) pageSize * pageNumber)
+                .limit(pageSize)
+                .toList();
     }
 
     @Override
