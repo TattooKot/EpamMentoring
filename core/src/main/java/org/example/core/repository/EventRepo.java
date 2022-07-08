@@ -68,15 +68,16 @@ public class EventRepo implements CRUDRepo<Long, Event> {
 
     public List<Event> getForDay(Date day, int pageSize, int pageNum){
         long DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
+        Date startDate = new Date(day.getTime()-DAY_IN_MILLIS);
         Date endDate = new Date(day.getTime()+DAY_IN_MILLIS);
 
         return eventMap
                 .values()
                 .stream()
                 .filter(event ->
-                        event.getDate().after(day)
+                        event.getDate().after(startDate)
                         && event.getDate().before(endDate))
-                .skip((long) pageNum * pageNum)
+                .skip((long) (pageNum - 1) * pageSize)
                 .limit(pageSize)
                 .toList();
     }
