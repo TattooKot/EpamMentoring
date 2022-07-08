@@ -1,10 +1,10 @@
 package org.example.core.repository;
 
 import org.example.core.DB;
+import org.example.core.model.Event;
 import org.example.core.model.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;

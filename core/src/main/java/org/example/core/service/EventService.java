@@ -27,4 +27,8 @@ public class EventService {
     public void deleteById(Long id) {
         eventRepo.deleteById(id);
     }
+
+    public List<Event> getByTitle(String title, int pageSize, int pageNum){
+        return eventRepo.getByTitle(title, pageSize, pageNum);
+    }
 }

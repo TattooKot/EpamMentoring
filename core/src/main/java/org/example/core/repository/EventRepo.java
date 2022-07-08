@@ -54,4 +54,14 @@ public class EventRepo implements CRUDRepo<Long, Event> {
     public void deleteById(Long id) {
         eventMap.remove(id);
     }
+
+
+    public List<Event> getByTitle(String title, int pageSize, int pageNum){
+        return eventMap.values()
+                .stream()
+                .filter(event -> event.getTitle().contains(title))
+                .skip((long) pageNum * pageNum)
+                .limit(pageSize)
+                .toList();
+    }
 }

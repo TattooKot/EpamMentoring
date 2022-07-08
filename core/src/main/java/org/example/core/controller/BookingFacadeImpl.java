@@ -4,46 +4,91 @@ import org.example.core.model.Event;
 import org.example.core.model.Ticket;
 import org.example.core.model.User;
 import org.example.core.service.EventService;
-import org.example.core.service.TicketService;
-import org.example.core.service.UserService;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
-public class BookingFacadeImpl implements BookingFacade{
-    private final UserService userService = new UserService();
+public class BookingFacadeImpl implements BookingFacade {
+
     private final EventService eventService = new EventService();
-    private final TicketService ticketService = new TicketService();
 
     @Override
-    public List<Event> getAllEvents() {
-        return eventService
-                .getAll()
-                .values()
-                .stream()
-                .toList();
+    public Event getEventById(long eventId) {
+        return eventService.getById(eventId);
+    }
+
+    @Override
+    public List<Event> getEventsByTitle(String title, int pageSize, int pageNum) {
+        return eventService.getByTitle(title, pageSize, pageNum);
+    }
+
+    @Override
+    public List<Event> getEventsForDay(Date day, int pageSize, int pageNum) {
+        return null;
+    }
+
+    @Override
+    public Event createEvent(Event event) {
+        return null;
+    }
+
+    @Override
+    public Event updateEvent(Event event) {
+        return null;
+    }
+
+    @Override
+    public boolean deleteEvent(long eventId) {
+        return false;
+    }
+
+    @Override
+    public User getUserById(long userId) {
+        return null;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public List<User> getUsersByName(String name, int pageSize, int pageNum) {
+        return null;
     }
 
     @Override
     public User createUser(User user) {
-        return userService.save(user).getValue();
+        return null;
     }
 
     @Override
-    public Ticket buyTicket(Integer userId, Integer eventId) {
-        Map.Entry<Integer, User> userEntry = userService.getById(userId);
-        if(userEntry.getValue() == null){
-            return new Ticket();
-        }
+    public User updateUser(User user) {
+        return null;
+    }
 
-        Map.Entry<Integer, Event> eventEntry = eventService.getById(eventId);
-        if(eventEntry.getValue() == null){
-            return new Ticket();
-        }
+    @Override
+    public boolean deleteUser(long userId) {
+        return false;
+    }
 
-        Ticket ticket = new Ticket();
-        ticket.setEvent(eventEntry.getValue());
-        ticket.setUser(userEntry.getValue());
-        return ticket;
+    @Override
+    public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) {
+        return null;
+    }
+
+    @Override
+    public List<Ticket> getBookedTickets(User user, int pageSize, int pageNum) {
+        return null;
+    }
+
+    @Override
+    public List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum) {
+        return null;
+    }
+
+    @Override
+    public boolean cancelTicket(long ticketId) {
+        return false;
     }
 }
