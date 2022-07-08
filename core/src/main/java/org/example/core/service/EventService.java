@@ -3,6 +3,7 @@ package org.example.core.service;
 import org.example.core.model.Event;
 import org.example.core.repository.EventRepo;
 
+import java.util.Date;
 import java.util.List;
 
 public class EventService {
@@ -30,5 +31,9 @@ public class EventService {
 
     public List<Event> getByTitle(String title, int pageSize, int pageNum){
         return eventRepo.getByTitle(title, pageSize, pageNum);
+    }
+
+    public List<Event> getForDate(Date day, int pageSize, int pageNum){
+        return eventRepo.getForDay(day, pageSize, pageNum);
     }
 }

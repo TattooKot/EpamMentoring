@@ -3,6 +3,7 @@ package org.example.core.repository;
 import org.example.core.DB;
 import org.example.core.model.Event;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -60,6 +61,21 @@ public class EventRepo implements CRUDRepo<Long, Event> {
         return eventMap.values()
                 .stream()
                 .filter(event -> event.getTitle().contains(title))
+                .skip((long) pageNum * pageNum)
+                .limit(pageSize)
+                .toList();
+    }
+
+    public List<Event> getForDay(Date day, int pageSize, int pageNum){
+        long DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
+        Date endDate = new Date(day.getTime()+DAY_IN_MILLIS);
+
+        return eventMap
+                .values()
+                .stream()
+                .filter(event ->
+                        event.getDate().after(day)
+                        && event.getDate().before(endDate))
                 .skip((long) pageNum * pageNum)
                 .limit(pageSize)
                 .toList();
