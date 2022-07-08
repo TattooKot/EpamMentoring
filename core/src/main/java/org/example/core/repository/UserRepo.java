@@ -48,7 +48,7 @@ public class UserRepo implements CRUDRepo<Long, User> {
         return userMap.values()
                 .stream()
                 .filter(user -> user.getName().contains(name))
-                .skip((long) pageSize * pageNumber)
+                .skip((long) (pageSize - 1) * pageNumber)
                 .limit(pageSize)
                 .toList();
     }

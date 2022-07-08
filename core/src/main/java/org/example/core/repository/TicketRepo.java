@@ -1,7 +1,9 @@
 package org.example.core.repository;
 
 import org.example.core.DB;
+import org.example.core.model.Event;
 import org.example.core.model.Ticket;
+import org.example.core.model.User;
 
 import java.util.List;
 import java.util.Map;
@@ -30,6 +32,24 @@ public class TicketRepo implements CRUDRepo<Long, Ticket> {
     @Override
     public List<Ticket> getAll() {
         return ticketMap.values().stream().toList();
+    }
+
+    public List<Ticket> getUserTickets(User user, int pageSize, int pageNum){
+        return ticketMap.values()
+                .stream()
+                .filter(ticket -> ticket.getUserId() == user.getId())
+                .skip((long) (pageNum - 1) * pageSize)
+                .limit(pageSize)
+                .toList();
+    }
+
+    public List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum){
+        return ticketMap.values()
+                .stream()
+                .filter(ticket -> ticket.getEventId() == event.getId())
+                .skip((long) (pageNum - 1) * pageSize)
+                .limit(pageSize)
+                .toList();
     }
 
     @Override

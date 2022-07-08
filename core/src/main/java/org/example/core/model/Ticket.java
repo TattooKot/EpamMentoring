@@ -1,14 +1,23 @@
 package org.example.core.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Ticket implements TicketInterface {
     private Long id;
     private Long eventId;
     private Long userId;
     private Category category;
     private Integer place;
+
+    public Ticket(Long eventId, Long userId, Category category, Integer place) {
+        this.eventId = eventId;
+        this.userId = userId;
+        this.category = category;
+        this.place = place;
+    }
 
     public long getId() {
         return id;

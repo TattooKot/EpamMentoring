@@ -4,6 +4,7 @@ import org.example.core.model.Event;
 import org.example.core.model.Ticket;
 import org.example.core.model.User;
 import org.example.core.service.EventService;
+import org.example.core.service.TicketService;
 import org.example.core.service.UserService;
 
 import java.util.Date;
@@ -13,6 +14,7 @@ public class BookingFacadeImpl implements BookingFacade {
 
     private final EventService eventService = new EventService();
     private final UserService userService = new UserService();
+    private final TicketService ticketService = new TicketService();
 
     @Override
     public Event getEventById(long eventId) {
@@ -76,21 +78,22 @@ public class BookingFacadeImpl implements BookingFacade {
 
     @Override
     public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) {
-        return null;
+        Ticket ticket = new Ticket(eventId, userId, category, place);
+        return ticketService.save(ticket);
     }
 
     @Override
     public List<Ticket> getBookedTickets(User user, int pageSize, int pageNum) {
-        return null;
+        return ticketService.getUserTickets(user, pageSize, pageNum);
     }
 
     @Override
     public List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum) {
-        return null;
+        return ticketService.getBookedTickets(event, pageSize, pageNum);
     }
 
     @Override
     public boolean cancelTicket(long ticketId) {
-        return false;
+        return ticketService.cancelTicket(ticketId);
     }
 }
