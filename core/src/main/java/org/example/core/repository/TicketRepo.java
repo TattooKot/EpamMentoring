@@ -51,7 +51,7 @@ public class TicketRepo implements CRUDRepo<Long, Ticket> {
     }
 
     @Override
-    public void deleteById(Long id) {
-        ticketMap.remove(id);
+    public boolean deleteById(Long id) {
+        return ticketMap.remove(id) != null;
     }
 }

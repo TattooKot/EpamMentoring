@@ -24,7 +24,7 @@ public class TicketService {
         return ticketRepo.update(ticket).orElseGet(Ticket::new);
     }
 
-    public void deleteById(Long id) {
-        ticketRepo.deleteById(id);
+    public boolean deleteById(Long id) {
+        return ticketRepo.deleteById(id);
     }
 }

@@ -58,8 +58,8 @@ public class UserRepo implements CRUDRepo<Long, User> {
     }
 
     @Override
-    public void deleteById(Long id) {
-        userMap.remove(id);
+    public boolean deleteById(Long id) {
+        return userMap.remove(id) != null;
     }
 
     private boolean isFieldsIncorrect(User user) {

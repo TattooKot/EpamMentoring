@@ -25,8 +25,8 @@ public class EventService {
         return eventRepo.update(event).orElseGet(Event::new);
     }
 
-    public void deleteById(Long id) {
-        eventRepo.deleteById(id);
+    public boolean deleteById(Long id) {
+        return eventRepo.deleteById(id);
     }
 
     public List<Event> getByTitle(String title, int pageSize, int pageNum){

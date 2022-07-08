@@ -29,17 +29,17 @@ public class BookingFacadeImpl implements BookingFacade {
 
     @Override
     public Event createEvent(Event event) {
-        return null;
+        return eventService.save(event);
     }
 
     @Override
     public Event updateEvent(Event event) {
-        return null;
+        return eventService.update(event);
     }
 
     @Override
     public boolean deleteEvent(long eventId) {
-        return false;
+        return eventService.deleteById(eventId);
     }
 
     @Override

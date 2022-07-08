@@ -9,5 +9,5 @@ public interface CRUDRepo <T, R>{
     Optional<R> getById(T id);
     List<R> getAll();
     Optional<R> update(R r);
-    void deleteById(T id);
+    boolean deleteById(T id);
 }

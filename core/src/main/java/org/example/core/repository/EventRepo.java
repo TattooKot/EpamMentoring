@@ -52,8 +52,8 @@ public class EventRepo implements CRUDRepo<Long, Event> {
     }
 
     @Override
-    public void deleteById(Long id) {
-        eventMap.remove(id);
+    public boolean deleteById(Long id) {
+        return eventMap.remove(id) != null;
     }
 
 
