@@ -12,9 +12,15 @@ import java.util.List;
 
 public class BookingFacadeImpl implements BookingFacade {
 
-    private final EventService eventService = new EventService();
-    private final UserService userService = new UserService();
-    private final TicketService ticketService = new TicketService();
+    private final EventService eventService;
+    private final UserService userService;
+    private final TicketService ticketService;
+
+    public BookingFacadeImpl(EventService eventService, UserService userService, TicketService ticketService) {
+        this.eventService = eventService;
+        this.userService = userService;
+        this.ticketService = ticketService;
+    }
 
     @Override
     public Event getEventById(long eventId) {
