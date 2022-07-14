@@ -6,10 +6,12 @@ import org.example.core.model.User;
 import org.example.core.service.EventService;
 import org.example.core.service.TicketService;
 import org.example.core.service.UserService;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class BookingFacadeImpl implements BookingFacade {
 
     private final EventService eventService;

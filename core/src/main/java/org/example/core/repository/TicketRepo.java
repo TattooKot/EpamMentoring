@@ -4,38 +4,44 @@ import org.example.core.DB;
 import org.example.core.model.Event;
 import org.example.core.model.Ticket;
 import org.example.core.model.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
 public class TicketRepo implements CRUDRepo<Long, Ticket> {
 
-    private final Map<Long, Ticket> ticketMap = DB.ticketMap;
+    private final DB db;
+
+    public TicketRepo(DB db) {
+        this.db = db;
+    }
 
     @Override
     public Optional<Ticket> save(Ticket ticket) {
-        long newId = ticketMap.size() + 1;
+        long newId = db.ticketMap.size() + 1;
         ticket.setId(newId);
-        ticketMap.put(newId, ticket);
+        db.ticketMap.put(newId, ticket);
         return Optional.of(ticket);
     }
 
     @Override
     public Optional<Ticket> getById(Long id) {
-        if(ticketMap.get(id) == null){
+        if(db.ticketMap.get(id) == null){
             return Optional.empty();
         }
-        return Optional.of(ticketMap.get(id));
+        return Optional.of(db.ticketMap.get(id));
     }
 
     @Override
     public List<Ticket> getAll() {
-        return ticketMap.values().stream().toList();
+        return db.ticketMap.values().stream().toList();
     }
 
     public List<Ticket> getUserTickets(User user, int pageSize, int pageNum){
-        return ticketMap.values()
+        return db.ticketMap.values()
                 .stream()
                 .filter(ticket -> ticket.getUserId() == user.getId())
                 .skip((long) (pageNum - 1) * pageSize)
@@ -44,7 +50,7 @@ public class TicketRepo implements CRUDRepo<Long, Ticket> {
     }
 
     public List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum){
-        return ticketMap.values()
+        return db.ticketMap.values()
                 .stream()
                 .filter(ticket -> ticket.getEventId() == event.getId())
                 .skip((long) (pageNum - 1) * pageSize)
@@ -55,7 +61,7 @@ public class TicketRepo implements CRUDRepo<Long, Ticket> {
     @Override
     public Optional<Ticket> update(Ticket ticket) {
         Long id =
-                ticketMap.entrySet()
+                db.ticketMap.entrySet()
                         .stream()
                         .filter(entry -> entry.getValue().equals(ticket))
                         .map(Map.Entry::getKey)
@@ -66,12 +72,12 @@ public class TicketRepo implements CRUDRepo<Long, Ticket> {
             return Optional.empty();
         }
 
-        ticketMap.put(id, ticket);
+        db.ticketMap.put(id, ticket);
         return Optional.of(ticket);
     }
 
     @Override
     public boolean deleteById(Long id) {
-        return ticketMap.remove(id) != null;
+        return db.ticketMap.remove(id) != null;
     }
 }

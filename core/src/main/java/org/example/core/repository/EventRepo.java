@@ -2,41 +2,49 @@ package org.example.core.repository;
 
 import org.example.core.DB;
 import org.example.core.model.Event;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
 public class EventRepo implements CRUDRepo<Long, Event> {
 
-    private final Map<Long, Event> eventMap = DB.eventMap;
+    @Autowired
+    private final DB db;
+
+    public EventRepo(DB db) {
+        this.db = db;
+    }
 
     @Override
     public Optional<Event> save(Event event) {
-        long newId = eventMap.size() + 1;
+        long newId = db.eventMap.size() + 1;
         event.setId(newId);
-        eventMap.put(newId, event);
+        db.eventMap.put(newId, event);
         return Optional.of(event);
     }
 
     @Override
     public Optional<Event> getById(Long id) {
-        if (eventMap.get(id) == null) {
+        if (db.eventMap.get(id) == null) {
             return Optional.empty();
         }
-        return Optional.of(eventMap.get(id));
+        return Optional.of(db.eventMap.get(id));
     }
 
     @Override
     public List<Event> getAll() {
-        return eventMap.values().stream().toList();
+        return db.eventMap.values().stream().toList();
     }
 
     @Override
     public Optional<Event> update(Event event) {
         Long id =
-                eventMap.entrySet()
+                db.eventMap.entrySet()
                         .stream()
                         .filter(entry -> entry.getValue().equals(event))
                         .map(Map.Entry::getKey)
@@ -47,18 +55,18 @@ public class EventRepo implements CRUDRepo<Long, Event> {
             return Optional.empty();
         }
 
-        eventMap.put(id, event);
+        db.eventMap.put(id, event);
         return Optional.of(event);
     }
 
     @Override
     public boolean deleteById(Long id) {
-        return eventMap.remove(id) != null;
+        return db.eventMap.remove(id) != null;
     }
 
 
     public List<Event> getByTitle(String title, int pageSize, int pageNum){
-        return eventMap.values()
+        return db.eventMap.values()
                 .stream()
                 .filter(event -> event.getTitle().contains(title))
                 .skip((long) pageNum * pageNum)
@@ -71,7 +79,7 @@ public class EventRepo implements CRUDRepo<Long, Event> {
         Date startDate = new Date(day.getTime()-DAY_IN_MILLIS);
         Date endDate = new Date(day.getTime()+DAY_IN_MILLIS);
 
-        return eventMap
+        return db.eventMap
                 .values()
                 .stream()
                 .filter(event ->

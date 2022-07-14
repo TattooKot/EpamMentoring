@@ -4,11 +4,16 @@ import org.example.core.model.Event;
 import org.example.core.model.Ticket;
 import org.example.core.model.User;
 import org.example.core.repository.TicketRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TicketService {
-    private final TicketRepo ticketRepo = new TicketRepo();
+
+    @Autowired
+    private TicketRepo ticketRepo;
 
     public Ticket save(Ticket ticket) {
         return ticketRepo.save(ticket).orElseGet(Ticket::new);

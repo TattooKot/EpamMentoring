@@ -2,11 +2,16 @@ package org.example.core.service;
 
 import org.example.core.model.User;
 import org.example.core.repository.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UserService {
-    private final UserRepo userRepo = new UserRepo();
+    @Autowired
+    private UserRepo userRepo;
 
     public User save(User user) {
         return userRepo.save(user).orElseGet(User::new);

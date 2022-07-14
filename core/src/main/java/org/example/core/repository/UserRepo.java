@@ -11,29 +11,33 @@ import java.util.Optional;
 @Repository
 public class UserRepo implements CRUDRepo<Long, User> {
 
-    private final Map<Long, User> userMap = DB.userMap;
+    private final DB db;
+
+    public UserRepo(DB db) {
+        this.db = db;
+    }
 
     public Optional<User> save(User user) {
         if (isFieldsIncorrect(user)) {
             return Optional.empty();
         }
 
-        long newId = userMap.size() + 1;
+        long newId = db.userMap.size() + 1;
         user.setId(newId);
-        userMap.put(newId, user);
+        db.userMap.put(newId, user);
         return Optional.of(user);
     }
 
     @Override
     public Optional<User> getById(Long id) {
-        if (userMap.get(id) == null) {
+        if (db.userMap.get(id) == null) {
             return Optional.empty();
         }
-        return Optional.of(userMap.get(id));
+        return Optional.of(db.userMap.get(id));
     }
 
     public Optional<User> getByEmail(String email) {
-        return userMap.values()
+        return db.userMap.values()
                 .stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst();
@@ -41,11 +45,11 @@ public class UserRepo implements CRUDRepo<Long, User> {
 
     @Override
     public List<User> getAll() {
-        return userMap.values().stream().toList();
+        return db.userMap.values().stream().toList();
     }
 
     public List<User> getByName(String name, int pageSize, int pageNumber){
-        return userMap.values()
+        return db.userMap.values()
                 .stream()
                 .filter(user -> user.getName().contains(name))
                 .skip((long) (pageSize - 1) * pageNumber)
@@ -56,7 +60,7 @@ public class UserRepo implements CRUDRepo<Long, User> {
     @Override
     public Optional<User> update(User user) {
         Long id =
-                userMap.entrySet()
+                db.userMap.entrySet()
                         .stream()
                         .filter(entry -> entry.getValue().equals(user))
                         .map(Map.Entry::getKey)
@@ -67,18 +71,18 @@ public class UserRepo implements CRUDRepo<Long, User> {
             return Optional.empty();
         }
 
-        userMap.put(id, user);
+        db.userMap.put(id, user);
 
         return Optional.of(user);
     }
 
     @Override
     public boolean deleteById(Long id) {
-        return userMap.remove(id) != null;
+        return db.userMap.remove(id) != null;
     }
 
     private boolean isFieldsIncorrect(User user) {
-        User userWithSameEmail = userMap.values()
+        User userWithSameEmail = db.userMap.values()
                 .stream()
                 .filter(v -> v.getEmail().equals(user.getEmail()))
                 .findFirst()

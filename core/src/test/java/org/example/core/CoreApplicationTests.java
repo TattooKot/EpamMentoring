@@ -13,14 +13,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
 class CoreApplicationTests {
 
     @Mock
@@ -42,11 +40,6 @@ class CoreApplicationTests {
         eventService = Mockito.mock(EventService.class);
         ticketService = Mockito.mock(TicketService.class);
         bookingFacade = new BookingFacadeImpl(eventService, userService, ticketService);
-    }
-
-
-    @Test
-    void contextLoads() {
     }
 
     @Test

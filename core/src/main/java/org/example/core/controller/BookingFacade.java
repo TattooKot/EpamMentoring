@@ -3,6 +3,7 @@ package org.example.core.controller;
 import org.example.core.model.Event;
 import org.example.core.model.Ticket;
 import org.example.core.model.User;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * Groups together all operations related to tickets booking.
  * Created by maksym_govorischev.
  */
+@Component
 public interface BookingFacade {
 
     /**

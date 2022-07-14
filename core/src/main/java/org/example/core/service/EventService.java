@@ -2,12 +2,17 @@ package org.example.core.service;
 
 import org.example.core.model.Event;
 import org.example.core.repository.EventRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class EventService {
-    private final EventRepo eventRepo = new EventRepo();
+
+    @Autowired
+    private EventRepo eventRepo;
 
     public Event save(Event event) {
         return eventRepo.save(event).orElseGet(Event::new);
