@@ -23,6 +23,7 @@
         <module>prikaluhi</module>
         <module>files-Task7</module>
         <module>core</module>
+        <module>springwebmvc</module>
     </modules>
 
     <properties>
