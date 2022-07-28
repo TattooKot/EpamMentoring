@@ -12,9 +12,9 @@
     <h1 class="display-4">User</h1>
     <p class="lead">This pages generates an account data for you.</p>
     <hr class="my-4">
-    <p>${user.name}</p>
-    <p>${user.email}</p>
-    <p>${account.phone}</p>
+    <p>Name: ${user.name}</p>
+    <p>Email: ${user.email}</p>
+    <p>Phone: ${user.phone}</p>
     <a class="btn btn-primary btn-lg" href="/accounts/generate" role="button">Generate</a>
     <a class="btn btn-secondary btn-lg" href="/accounts/add" role="button">Enter data</a>
 </div>
