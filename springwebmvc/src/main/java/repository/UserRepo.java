@@ -1,5 +1,6 @@
 package repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import utils.DB;
 import model.User;
 import org.springframework.stereotype.Repository;
@@ -11,11 +12,8 @@ import java.util.Optional;
 @Repository
 public class UserRepo implements CRUDRepo<Long, User> {
 
-    private final DB db;
-
-    public UserRepo(DB db) {
-        this.db = db;
-    }
+    @Autowired
+    private DB db;
 
     public Optional<User> save(User user) {
         if (isFieldsIncorrect(user)) {

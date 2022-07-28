@@ -1,6 +1,8 @@
 package controller;
 
+import facade.BookingFacade;
 import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.io.IOException;
 
 @Controller
-public class RestCont {
+public class RestContV1 {
+
+    @Autowired
+    private BookingFacade bookingFacade;
 
     @GetMapping("/")
     public String welcome() {

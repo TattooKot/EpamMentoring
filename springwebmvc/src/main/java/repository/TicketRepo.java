@@ -1,5 +1,6 @@
 package repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import utils.DB;
 import model.Event;
 import model.Ticket;
@@ -13,11 +14,8 @@ import java.util.Optional;
 @Repository
 public class TicketRepo implements CRUDRepo<Long, Ticket> {
 
-    private final DB db;
-
-    public TicketRepo(DB db) {
-        this.db = db;
-    }
+    @Autowired
+    private DB db;
 
     @Override
     public Optional<Ticket> save(Ticket ticket) {

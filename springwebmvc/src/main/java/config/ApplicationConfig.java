@@ -1,15 +1,12 @@
 package config;
 
-import controller.RestCont;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan(basePackages = "controller")
 @EnableWebMvc
 public class ApplicationConfig {
 
@@ -19,11 +16,6 @@ public class ApplicationConfig {
         resolver.setPrefix("/WEB-INF/");
         resolver.setSuffix(".jsp");
         return resolver;
-    }
-
-    @Bean
-    public RestCont restCont(){
-        return new RestCont();
     }
 }
 

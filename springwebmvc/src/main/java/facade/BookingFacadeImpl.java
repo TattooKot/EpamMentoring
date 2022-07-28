@@ -3,26 +3,23 @@ package facade;
 import model.Event;
 import model.Ticket;
 import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import service.EventService;
 import service.TicketService;
 import service.UserService;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 
-@Component
+@Controller
 public class BookingFacadeImpl implements BookingFacade {
-
-    private final EventService eventService;
-    private final UserService userService;
-    private final TicketService ticketService;
-
-    public BookingFacadeImpl(EventService eventService, UserService userService, TicketService ticketService) {
-        this.eventService = eventService;
-        this.userService = userService;
-        this.ticketService = ticketService;
-    }
+    @Autowired
+    private EventService eventService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private TicketService ticketService;
 
     @Override
     public Event getEventById(long eventId) {

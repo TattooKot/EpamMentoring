@@ -1,24 +1,20 @@
 package repository;
 
-import utils.DB;
 import model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
+import utils.DB;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Repository
+@Component
 public class EventRepo implements CRUDRepo<Long, Event> {
 
     @Autowired
-    private final DB db;
-
-    public EventRepo(DB db) {
-        this.db = db;
-    }
+    private DB db;
 
     @Override
     public Optional<Event> save(Event event) {
