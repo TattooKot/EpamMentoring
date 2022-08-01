@@ -42,7 +42,7 @@ public class RestContV1 {
 
     @PostMapping("/user")
     public String createUser(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) User user, Model model) {
-        System.out.println("User from form: " + user);
+        user = bookingFacade.createUser(user);
         model.addAttribute("user", user);
         return "user";
     }
