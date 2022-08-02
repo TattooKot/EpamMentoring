@@ -14,8 +14,9 @@
     <hr class="my-4">
     <p>Name: ${event.title}</p>
     <p>Email: ${event.date}</p>
-    <a class="btn btn-primary btn-lg" href="/accounts/generate" role="button">Generate</a>
-    <a class="btn btn-secondary btn-lg" href="/accounts/add" role="button">Enter data</a>
+    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath.concat('/addEvent')}" role="button">Create event</a>
+    <a class="btn btn-secondary btn-lg" onclick="history.back()" role="button">Back</a>
+    <p><a class="btn btn-secondary btn-lg" href="${pageContext.request.contextPath}/" role="button">Home</a></p>
 </div>
 </body>
 </html>

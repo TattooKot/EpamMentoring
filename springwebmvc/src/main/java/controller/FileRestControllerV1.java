@@ -29,30 +29,21 @@ public class FileRestControllerV1 {
 
     @GetMapping("/event")
     @ResponseBody
-    public ResponseEntity<byte[]> eventByTitle(
-            @RequestParam String title,
-            @RequestParam Integer size,
-            @RequestParam Integer num)
-            throws IOException {
+    public ResponseEntity<byte[]> eventByTitle(@RequestParam String title, @RequestParam Integer size, @RequestParam Integer num) throws IOException {
         List<Event> eventsByTitle = bookingFacade.getEventsByTitle(title, size, num);
         System.out.println(eventsByTitle);
         return createPdf(eventsByTitle.toString());
     }
 
-    @GetMapping("/event")
+    @GetMapping("/event/date")
     @ResponseBody
-    public ResponseEntity<byte[]> eventByDate(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
-            @RequestParam Integer size,
-            @RequestParam Integer num)
-            throws IOException {
+    public ResponseEntity<byte[]> eventByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date, @RequestParam Integer size, @RequestParam Integer num) throws IOException {
         List<Event> eventsForDay = bookingFacade.getEventsForDay(date, size, num);
         System.out.println(eventsForDay);
         return createPdf(eventsForDay.toString());
     }
 
-    @GetMapping("/file")
-    public ResponseEntity<byte[]> createPdf(String string) throws IOException {
+    private ResponseEntity<byte[]> createPdf(String string) throws IOException {
 
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
@@ -60,7 +51,7 @@ public class FileRestControllerV1 {
 
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-        contentStream.setFont(PDType1Font.COURIER, 12);
+        contentStream.setFont(PDType1Font.COURIER, 6);
         contentStream.beginText();
         contentStream.newLineAtOffset(30, page.getMediaBox().getHeight() - 30);
         contentStream.showText(string);
@@ -75,8 +66,6 @@ public class FileRestControllerV1 {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_PDF);
 
-        return ResponseEntity.ok()
-                .headers(httpHeaders)
-                .body(byteArrayOutputStream.toByteArray());
+        return ResponseEntity.ok().headers(httpHeaders).body(byteArrayOutputStream.toByteArray());
     }
 }

@@ -12,8 +12,9 @@
     <h1 class="display-4">Welcome</h1>
     <p class="lead">2-3 тижні, і томкат запрацює :D</p>
     <hr class="my-4">
-    <a class="btn btn-primary btn-lg" href=${pageContext.request.contextPath.concat('/addUser')} role="button">Реєстрація</a>
-    <a class="btn btn-secondary btn-lg" href=${pageContext.request.contextPath.concat('/eventNavigation')} role="button">Події</a>
+    <a class="btn btn-primary btn-lg" href=${pageContext.request.contextPath.concat('/addEvent')} role="button">Create event</a>
+    <a class="btn btn-secondary btn-lg" href=${pageContext.request.contextPath.concat('/eventSearch')} role="button">Find event</a>
+    <a class="btn btn-secondary btn-lg" onclick="history.back()" role="button">Back</a>
 </div>
 </body>
 </html>
