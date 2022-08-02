@@ -1,18 +1,20 @@
 package controller;
 
 import facade.BookingFacade;
+import model.Event;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
 
 @Controller
-public class RestContV1 {
+public class FacadeControllerV1 {
 
     @Autowired
     private BookingFacade bookingFacade;
@@ -28,14 +30,9 @@ public class RestContV1 {
         return "userForm";
     }
 
-    @GetMapping("/user")
-    public String user(Model model) throws IOException {
-        User user = new User();
-//        user.setEmail("email@epam.com");
-//        user.setName("First user");
-//        user.setPhone(123456789);
-//        System.out.println(user);
-
+    @GetMapping("/user/{id}")
+    public String user(Model model, @PathVariable Integer id) throws IOException {
+        User user = bookingFacade.getUserById(id);
         model.addAttribute("user", user);
         return "user";
     }
@@ -45,5 +42,26 @@ public class RestContV1 {
         user = bookingFacade.createUser(user);
         model.addAttribute("user", user);
         return "user";
+    }
+
+
+    @GetMapping("/addEvent")
+    public String getEventForm() {
+        return "eventForm";
+    }
+
+    @GetMapping("/event/{id}")
+    public String event(Model model, @PathVariable Integer id) throws IOException {
+        Event event = bookingFacade.getEventById(id);
+        model.addAttribute("event", event);
+        return "user";
+    }
+
+    @PostMapping("/event")
+    public String createEvent(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Event event, Model model) {
+        event = bookingFacade.createEvent(event);
+        System.out.println(event);
+        model.addAttribute("event", event);
+        return "event";
     }
 }

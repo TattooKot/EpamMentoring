@@ -8,17 +8,15 @@
 </head>
 <body>
 <div class="container" style="margin-top: 10%; width: 30%">
-    <h3>Enter user data</h3>
-    <form method="post" action=${pageContext.request.contextPath.concat('/user')}>
+    <h3>Enter event data</h3>
+    <form method="post" action=${pageContext.request.contextPath.concat('/event')}>
         <div class="form-group">
-            <input id="nameInput" name="name" type="text" class="form-control" placeholder="Name"/>
+            <input id="titleInput" name="title" type="text" class="form-control" placeholder="Title"/>
         </div>
         <div class="form-group">
-            <input id="emailInput" name="email" type="text" class="form-control" placeholder="Email"/>
+            <input id="dateInput" name="date" type="date" class="form-control" placeholder="date"/>
         </div>
-        <div class="form-group">
-             <input id="phoneInput" name="phone" type="number" class="form-control" placeholder="Phone"/>
-        </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
