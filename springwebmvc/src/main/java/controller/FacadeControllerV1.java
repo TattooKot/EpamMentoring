@@ -51,16 +51,15 @@ public class FacadeControllerV1 {
     }
 
     @GetMapping("/event/{id}")
-    public String event(Model model, @PathVariable Integer id) throws IOException {
+    public String eventById(Model model, @PathVariable Integer id) {
         Event event = bookingFacade.getEventById(id);
         model.addAttribute("event", event);
-        return "user";
+        return "event";
     }
 
     @PostMapping("/event")
     public String createEvent(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Event event, Model model) {
         event = bookingFacade.createEvent(event);
-        System.out.println(event);
         model.addAttribute("event", event);
         return "event";
     }

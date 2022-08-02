@@ -3,8 +3,11 @@ package model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 @Data
 @NoArgsConstructor
+@XmlRootElement
 public class Ticket implements TicketInterface {
     private long id;
     private long eventId;

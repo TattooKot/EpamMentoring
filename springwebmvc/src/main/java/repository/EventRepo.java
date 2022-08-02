@@ -64,8 +64,8 @@ public class EventRepo implements CRUDRepo<Long, Event> {
     public List<Event> getByTitle(String title, int pageSize, int pageNum){
         return db.eventMap.values()
                 .stream()
-                .filter(event -> event.getTitle().contains(title))
-                .skip((long) pageNum * pageNum)
+                .filter(event -> event.getTitle().toLowerCase().contains(title.toLowerCase()))
+                .skip((long) pageSize * (pageNum - 1))
                 .limit(pageSize)
                 .toList();
     }
