@@ -31,7 +31,6 @@ public class FileRestControllerV1 {
     @ResponseBody
     public ResponseEntity<byte[]> eventByTitle(@RequestParam String title, @RequestParam Integer size, @RequestParam Integer num) throws IOException {
         List<Event> eventsByTitle = bookingFacade.getEventsByTitle(title, size, num);
-        System.out.println(eventsByTitle);
         return createPdf(eventsByTitle);
     }
 
@@ -39,7 +38,6 @@ public class FileRestControllerV1 {
     @ResponseBody
     public ResponseEntity<byte[]> eventByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date, @RequestParam Integer size, @RequestParam Integer num) throws IOException {
         List<Event> eventsForDay = bookingFacade.getEventsForDay(date, size, num);
-        System.out.println(eventsForDay);
         return createPdf(eventsForDay);
     }
 
